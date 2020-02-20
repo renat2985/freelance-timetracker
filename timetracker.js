@@ -15,18 +15,16 @@ $(document).ready(function() {
         timed.val(t.niceTime(timed.data('value')));
 
         var time_array = t.niceTime(timed.data('value')).split(':');
+        var leaf = '<i class="fa fa-leaf" aria-hidden="true" title="+1 hours"></i>', leaf_n = Number((timed.data('value')/3600).toString().split('.')[0]);
 
         $("#big-time").html(time_array[0]+':'+time_array[1]);
         $("#big-total").html(t.config.currency+total.data('value').toFixed(2));
         $("#client-title").html(tr.find('.client').val());
+        $("#buns").html(Array(leaf_n+1).join(leaf));
         $("#client-task").html(tr.find('.task').val()+' <i>'+tr.find('.desc').val()+'</i>');
-
-
-
 
         tr.addClass("shadow-2xl");
         tr.removeClass("opacity-25");
-
 
         nanobar.go(100*time_array[1]/60);
 
@@ -39,6 +37,12 @@ $(document).ready(function() {
           document.getElementById("notify").play();
         }
 
+        if ((time_array[1] == '15' || time_array[1] == '45' || time_array[1] == '00' || time_array[1] == '30') && time_array[2] < '15') {
+          document.getElementById("favicon").setAttribute("href", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAgMAAABinRfyAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAJUExURcYsLMYsLMcsLFgXH1EAAAADdFJOU+oDWv6QeoEAAABCSURBVAjXYwgFAobQsKkgYimQiAASmgmcGQyCDowuDIINTFBCs4Epg2FqA1MYQ2gDUyhDGAPDVIYwBaapML0gAggAEqYTlpEydbMAAAAASUVORK5CYII=");
+        } else {
+          document.getElementById("favicon").setAttribute("href", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAgMAAABinRfyAAAACVBMVEX///////////+OSuX+AAAAA3RSTlPxA3OsUa58AAAAPklEQVQI12MIBQIGKJEAIqJARIMqQ9YUBk6GrBlcTAyhAVwMDKsSuBYACaYFQC4DA4PDDAagRAhQCVgx3BQAEtgS/LOBBnMAAAAASUVORK5CYII=");
+        }
+
         tr.addClass('success');
       } else {
         tr.removeClass('success');
@@ -48,10 +52,11 @@ $(document).ready(function() {
 
     // Update title and save countdown
     if ($('.timer:checked').length > 0) {
-      document.title = '('+$('.timer:checked').length+') Timetracker';
+      document.title = '('+$('.timer:checked').length+') Freelance Timetracker';
       t.config.savenext = t.config.savenext - 1000;
     } else {
-      document.title = 'Timetracker';
+      document.title = 'Freelance Timetracker';
+      document.getElementById("favicon").setAttribute("href", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAgMAAABinRfyAAAACVBMVEX///////////+OSuX+AAAAA3RSTlPyEIWbJgaeAAAAR0lEQVQI12MITeAMZQhjYJjKEKEaocqQkMDJyeDI1ODI0MXUsIiBhalBAEhkAQmGVSCCQYChi4FhEYMjAxCBFYO1gQ0AGQUAPMQN3Y+L5kQAAAAASUVORK5CYII=");
     }
     // Saving time?
     if (t.config.savenext <= 0) {
@@ -109,7 +114,7 @@ $(document).ready(function() {
       '<tr id="task-'+key+'" data-id="'+key+'" class="taskrow'+(obj.timed == '0'?' opacity-25': '')+'">' +
       '<td class="pl-8"><input class="timer" id="chek-'+key+'" type="checkbox"><label for="chek-'+key+'" class="text-3xl"></label></td>' +
       '<td><input class="date input-mini text-xs appearance-none border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline" type="date" placeholder="Date" value="'+obj.date+'"></td>' +
-      '<td><i class="fa fa-circle-o" style="color:'+t.generateColor(obj.client)+'" aria-hidden="true"></i></td>' +
+      '<td><i class="fa fa-circle opacity-50" style="color:'+t.generateColor(obj.client)+'" aria-hidden="true"></i></td>' +
       '<td><input class="client input-mini font-bold appearance-none border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline" type="text" placeholder="Client" value="'+obj.client+'"></td>' +
       '<td><input class="task input-large italic appearance-none border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline" type="text" placeholder="Task" value="'+obj.task+'"></td>' +
       '<td><input class="rate input-mini text-center appearance-none border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline" type="text" placeholder="'+obj.rate+'" value="'+obj.rate+'"></td>' +

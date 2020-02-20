@@ -75,7 +75,7 @@ if (strlen($data) < 3) {
   <!--Fonts and icons -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="icon" type="image/png" id="favicon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAgMAAABinRfyAAAACVBMVEX///////////+OSuX+AAAAA3RSTlPyEIWbJgaeAAAAR0lEQVQI12MITeAMZQhjYJjKEKEaocqQkMDJyeDI1ODI0MXUsIiBhalBAEhkAQmGVSCCQYChi4FhEYMjAxCBFYO1gQ0AGQUAPMQN3Y+L5kQAAAAASUVORK5CYII=">
 </head>
 <body>
   <!-- partial:index.partial.html -->
@@ -96,8 +96,8 @@ if (strlen($data) < 3) {
             <h2 id="big-total" class="text-2xl text-indigo-400 -mt-5"></h2>
           </div>
           <div class="mr-auto border-l-4 border-indigo-500 p-4">
-            <h1 class="text-xl leading-none mb-1" id="client-title">Time tracker for freelancer</h1>
-            <h2 class="text-indigo-400 text-sm" id="client-task">Click the checkbox to start timing a task, edit any fields by clicking on them.</h2>
+            <h1 class="text-xl leading-none mb-1"><span id="client-title">Time tracker for freelancer</span> <span id="buns" class="text-indigo-500 text-sm"></span></h1>
+            <h2 class="text-indigo-400 text-sm" id="client-task">Click the <i class="fa fa-play-circle-o" aria-hidden="true"></i> button to start timing a task, edit any fields by clicking on them.</h2>
           </div>
           <form>
             <button id="save" class="bg-indigo-600 text-white py-2 text-sm px-3 rounded focus:outline-none">Save now</button>
